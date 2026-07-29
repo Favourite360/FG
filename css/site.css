@@ -1,0 +1,386 @@
+/* ---------------------------------------------------------------------------
+   FG Onyenwe Transport & Logistics — supplementary styles.
+
+   styles.css was compiled from the original site, so it only contains the
+   classes that site happened to use. Anything new we add to a page needs its
+   rule defined here.
+
+   Loaded AFTER styles.css, so anything here wins.
+   --------------------------------------------------------------------------- */
+
+/* --- spacing / sizing ---------------------------------------------------- */
+.pr-11 { padding-right: 2.75rem; }
+.top-5 { top: 1.25rem; }
+.right-5 { right: 1.25rem; }
+.fg-dialog-width { max-width: min(100% - 2rem, 52rem); }
+
+/* --- colour -------------------------------------------------------------- */
+.text-slate-800 { color: #1e293b; }
+.bg-slate-950\/50 { background-color: rgb(2 6 23 / 0.5); }
+.accent-\[\#E84C30\] { accent-color: #E84C30; }
+
+/* --- shadow -------------------------------------------------------------- */
+.fg-dialog-shadow { box-shadow: 0 40px 100px rgba(15, 23, 42, 0.18); }
+
+/* --- backgrounds --------------------------------------------------------- */
+.bg-no-repeat { background-repeat: no-repeat; }
+.appearance-none { appearance: none; -webkit-appearance: none; }
+.\[background-size\:12px\] { background-size: 12px; }
+.\[background-position\:right_1\.1rem_center\] {
+  background-position: right 1.1rem center;
+}
+
+/* Dropdown chevron. Native select arrows differ wildly between browsers, so we
+   hide the default (appearance:none above) and draw our own. */
+select.appearance-none {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+}
+
+/* --- hover states -------------------------------------------------------- */
+.hover\:no-underline:hover { text-decoration-line: none; }
+.hover\:text-slate-700:hover { color: #334155; }
+.hover\:border-\[\#E84C30\]\/50:hover { border-color: rgb(232 76 48 / 0.5); }
+
+/* --- selected-radio cards ------------------------------------------------ */
+/* :has() lets the label restyle itself when the radio inside it is checked,
+   which is how the One-off / Long term choices highlight. */
+.has-\[\:checked\]\:border-\[\#E84C30\]:has(:checked) { border-color: #E84C30; }
+.has-\[\:checked\]\:bg-\[\#E84C30\]\/5:has(:checked) {
+  background-color: rgb(232 76 48 / 0.05);
+}
+.has-\[\:checked\]\:text-\[\#E84C30\]:has(:checked) { color: #E84C30; }
+
+/* Fallback for older browsers without :has() — the radio still works, the
+   card just doesn't tint. Keeps the outline visible so the choice is clear. */
+@supports not selector(:has(*)) {
+  input[type="radio"]:focus-visible + span,
+  label:focus-within {
+    outline: 2px solid #E84C30;
+    outline-offset: 2px;
+  }
+}
+
+/* --- form status message -------------------------------------------------- */
+[role="status"][hidden] { display: none; }
+
+/* --- invalid field highlight --------------------------------------------- */
+[aria-invalid="true"] {
+  border-color: #dc2626 !important;
+  box-shadow: 0 0 0 3px rgb(220 38 38 / 0.12);
+}
+
+/* --- 'Why choose us' fleet image ----------------------------------------- */
+/* Artwork is roughly 2.4:1. Inside the tall card column it is allowed a little
+   bleed past its grid cell so it reads at a similar visual weight to the four
+   cards beside it, and stays vertically centred against them. */
+.fg-wcu-wrap { min-height: 200px; }
+.fg-wcu-img { width: 100%; height: auto; max-width: none; }
+
+@media (min-width: 1024px) {
+  .fg-wcu-wrap { min-height: 400px; }
+  .fg-wcu-img { width: 118%; }
+}
+@media (min-width: 1280px) {
+  .fg-wcu-img { width: 126%; }
+}
+
+/* --- Logistics page rebuild ---------------------------------------------- */
+/* Utilities the original compiled stylesheet never needed. Kept grouped so the
+   Logistics page can be edited without hunting through the file. */
+
+/* spacing */
+.mt-9  { margin-top: 2.25rem; }
+.mt-14 { margin-top: 3.5rem; }
+.p-7   { padding: 1.75rem; }
+.py-2\.5 { padding-block: 0.625rem; }
+.gap-x-10 { column-gap: 2.5rem; }
+.gap-y-10 { row-gap: 2.5rem; }
+.space-y-20 > :not([hidden]) ~ :not([hidden]) { margin-top: 5rem; }
+
+/* sizing */
+.size-11 { width: 2.75rem; height: 2.75rem; }
+.size-12 { width: 3rem; height: 3rem; }
+.min-h-\[420px\] { min-height: 420px; }
+.h-\[280px\] { height: 280px; }
+@media (min-width: 640px) { .sm\:h-\[340px\] { height: 340px; } }
+@media (min-width: 768px) { .md\:min-h-\[540px\] { min-height: 540px; } }
+
+/* colour */
+.text-white\/60 { color: rgb(255 255 255 / 0.6); }
+.text-white\/70 { color: rgb(255 255 255 / 0.7); }
+.border-white\/15 { border-color: rgb(255 255 255 / 0.15); }
+.border-white\/50 { border-color: rgb(255 255 255 / 0.5); }
+.hover\:bg-slate-50:hover { background-color: #f8fafc; }
+.hover\:bg-white\/15:hover { background-color: rgb(255 255 255 / 0.15); }
+
+/* flag tiles in the West Coast section */
+.h-24 { height: 6rem; }
+@media (min-width: 640px) { .sm\:h-28 { height: 7rem; } }
+
+/* terminal groups */
+.first\:mt-0:first-child { margin-top: 0; }
+.text-\[\#1a1a1a\]\/60 { color: rgb(26 26 26 / 0.6); }
+
+/* --- homepage fleet slider ------------------------------------------------ */
+/* Both photos are stacked in one fixed 16:9 frame and cross-faded, so the copy
+   column beside them never jumps as the slide changes. The frame needs a set
+   ratio because absolutely-positioned images have no height of their own. */
+.fg-fleet-frame { position: relative; aspect-ratio: 16 / 9; background-color: #f1f5f9; }
+.fg-fleet-frame img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  /* must stay well under the rotator's 1s interval, otherwise the next slide
+     starts before this fade has finished and the photo never settles */
+  transition: opacity 320ms ease;
+}
+/* the first image carries data-active in the markup, so if the JavaScript
+   never runs the section still shows a photo instead of an empty box */
+.fg-fleet-frame img[data-active] { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .fg-fleet-frame img { transition: none; }
+}
+
+/* prev / next controls either side of the dots */
+.fg-fleet-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  flex: none;
+  border: 1px solid rgb(148 163 184 / 0.45);
+  border-radius: 9999px;
+  background: #fff;
+  color: #0f172a;
+  cursor: pointer;
+  transition: background 150ms ease, border-color 150ms ease, color 150ms ease;
+}
+.fg-fleet-arrow:hover {
+  background: #E84C30;
+  border-color: #E84C30;
+  color: #fff;
+}
+.fg-fleet-arrow:focus-visible {
+  outline: 2px solid #E84C30;
+  outline-offset: 2px;
+}
+
+/* --- "Now Open" announcement flyer (homepage) ----------------------------- */
+/* Written as plain CSS rather than utility classes: it is a self-contained
+   component and easier to restyle or retire in one place. */
+.fg-flyer-wrap {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+.fg-flyer-wrap[hidden] { display: none; }
+
+.fg-flyer-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgb(2 6 23 / 0.7);
+  backdrop-filter: blur(3px);
+}
+
+.fg-flyer {
+  position: relative;
+  width: min(100%, 46rem);
+  max-height: calc(100vh - 2rem);
+  overflow: auto;
+  border-radius: 1.5rem;
+  background:
+    radial-gradient(120% 90% at 100% 0%, #dbeafe 0%, transparent 55%),
+    linear-gradient(160deg, #ffffff 0%, #f8fafc 55%, #eef2f7 100%);
+  box-shadow: 0 40px 100px rgb(2 6 23 / 0.45);
+  animation: fg-flyer-in 320ms ease-out both;
+}
+@keyframes fg-flyer-in {
+  from { opacity: 0; transform: translateY(14px) scale(0.98); }
+  to   { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fg-flyer { animation: none; }
+}
+
+.fg-flyer-close {
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 0;
+  border-radius: 9999px;
+  background: rgb(15 23 42 / 0.06);
+  color: #0f172a;
+  cursor: pointer;
+  transition: background 150ms ease;
+}
+.fg-flyer-close:hover { background: rgb(15 23 42 / 0.14); }
+
+.fg-flyer-body { padding: 2rem 1.75rem 0; }
+
+.fg-flyer-kicker {
+  margin: 0;
+  font-size: clamp(2.25rem, 8vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, #FB3323, #E84C30);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+/* if a browser can't paint clipped-text gradients the heading must not vanish */
+@supports not ((background-clip: text) or (-webkit-background-clip: text)) {
+  .fg-flyer-kicker { color: #E84C30; background: none; }
+}
+
+.fg-flyer-sub {
+  margin: 0.6rem 0 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: rgb(15 23 42 / 0.65);
+}
+
+.fg-flyer-flags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 0.85rem;
+  margin: 0.9rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.fg-flyer-flags li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.fg-flyer-flags img {
+  width: 1.4rem;
+  height: 1rem;
+  object-fit: cover;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px rgb(15 23 42 / 0.12);
+}
+.fg-flyer-flags span {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: rgb(15 23 42 / 0.6);
+}
+/* on a narrow phone the names crowd the row; the flags alone still read */
+@media (max-width: 420px) {
+  .fg-flyer-flags span { display: none; }
+  .fg-flyer-flags { gap: 0.5rem; }
+}
+
+.fg-flyer-stops {
+  margin: 1.25rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 1rem;
+}
+@media (min-width: 640px) {
+  .fg-flyer-stops { grid-template-columns: 1fr 1fr; }
+  .fg-flyer-stops > li:first-child { grid-column: 1 / -1; }
+}
+
+.fg-flyer-stop {
+  border: 1px solid rgb(148 163 184 / 0.28);
+  border-radius: 1rem;
+  background: rgb(255 255 255 / 0.75);
+  padding: 0.95rem 1.05rem;
+}
+.fg-flyer-stop h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+.fg-flyer-addr {
+  display: flex;
+  gap: 0.5rem;
+  margin: 0.5rem 0 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: rgb(15 23 42 / 0.72);
+}
+.fg-flyer-addr svg { flex: none; width: 1rem; height: 1rem; margin-top: 0.15rem; }
+
+.fg-flyer-tel {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.7rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 9999px;
+  background: #ecfdf5;
+  border: 1px solid #d6efd7;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #166534;
+  text-decoration: none;
+}
+.fg-flyer-tel:hover { background: #d1fae5; }
+.fg-flyer-tel svg { width: 1rem; height: 1rem; }
+
+.fg-flyer-cta {
+  display: inline-block;
+  margin-top: 1.25rem;
+  padding: 0.7rem 1.6rem;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, #FB3323, #E84C30);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+}
+.fg-flyer-cta:hover { opacity: 0.9; }
+
+.fg-flyer-art {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 1.25rem 1.75rem 1.5rem;
+}
+.fg-flyer-coach {
+  width: 46%;
+  height: auto;
+  border-radius: 0.9rem;
+  box-shadow: 0 12px 30px rgb(2 6 23 / 0.18);
+}
+.fg-flyer-truck { width: 50%; height: auto; }
+
+/* --- 404 page ------------------------------------------------------------- */
+.py-24 { padding-block: 6rem; }
+
+/* --- Terminals hero photo ------------------------------------------------- */
+/* Now that it stands alone rather than beside a second image it is given more
+   height at each breakpoint. styles.css was compiled before these were used. */
+@media (min-width: 640px) {
+  .sm\:h-72 { height: 18rem; }
+  .sm\:h-80 { height: 20rem; }
+}
+@media (min-width: 768px) {
+  .md\:h-80 { height: 20rem; }
+  .md\:h-96 { height: 24rem; }
+}
