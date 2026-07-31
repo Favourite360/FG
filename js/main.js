@@ -141,7 +141,7 @@
       stop();
       timer = window.setInterval(function () {
         paint((index + 1) % FLEET.length);
-      }, 1500);
+      }, 20000);
     }
     function stop() { if (timer) window.clearInterval(timer); timer = null; }
 
