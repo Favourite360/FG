@@ -93,21 +93,30 @@ what subfolders are called — `/images` is just a common convention, not a rule
 Renaming it would mean editing about sixty references across the site, with
 nothing gained.
 
-### No `.htaccess`
+### Clean URLs
 
-The site does not use one. Everything works from plain files: a request for
-`/about.html` gets `about.html`.
+Pages are served without the `.html` ending: `/about`, `/services`, `/terminals`.
+Every internal link, canonical tag and `sitemap.xml` entry uses that form. The
+files on disk are still `about.html` and so on — only the address changes.
 
-One consequence worth knowing. The previous React site served pages at
-`/about`, `/services`, `/terminals` — no `.html` on the end, and those are the
-addresses Google has indexed. Anyone arriving on one of those links now lands
-on the 404 page instead of the page they wanted. It sorts itself out as Google
-re-crawls and picks up the new addresses from `sitemap.xml`, which typically
-takes a few weeks.
+**On Vercel** this comes from `vercel.json`:
 
-If you ever want those old links working again, there's an `htaccess.txt` in
-the `optional-extras` folder. Upload it to `public_html`, rename it to
-`.htaccess`, and it handles that plus https, compression and image caching.
+```
+{ "cleanUrls": true, "trailingSlash": false }
+```
+
+Vercel also 308-redirects the old `/about.html` addresses to `/about`, so
+nothing that is already indexed breaks. As a bonus these are the same addresses
+the previous React site used, so old Google results now land on the right page.
+
+**On Hostinger or any other Apache host** `vercel.json` does nothing — you need
+`htaccess.txt` from the `optional-extras` folder. Upload it to `public_html`,
+rename it to `.htaccess`, and it handles the extensionless URLs plus https,
+compression and image caching. Without it, `/about` returns a 404 there.
+
+**Opening the files locally** still means double-clicking `about.html`; clean
+URLs need a server, so the menu links will 404 from `file://`. Preview on the
+deployed site instead.
 
 ---
 
